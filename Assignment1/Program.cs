@@ -202,6 +202,7 @@ namespace Assignment1
         public static int numJewelsInStones(int[] J,int[] S)
         {
             int count = 0;
+            //Using Nested foreach loops for generate count.
             foreach (int number1 in J)
             {
                 foreach (int number2 in S)
@@ -240,6 +241,7 @@ namespace Assignment1
         {
             try
             {
+                //Making sure that first array is smaller than second array just for easy computation
                 if (a.Length > b.Length)
                 {
                     int[] temper = b;
@@ -247,6 +249,7 @@ namespace Assignment1
                     a = temper;
                 }
                 List<int> final = new List<int>();
+                //Here we are using nested for loops and List to generate sequence sub array and storing in a temp variable
                 for (int i = 0; i < a.Length; i++)
                 {
                     List<int> temp = new List<int>();
