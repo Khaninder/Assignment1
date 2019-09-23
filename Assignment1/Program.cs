@@ -29,6 +29,7 @@ namespace Assignment1
             Console.WriteLine("Question 4...!!!");
             int[] r5 = getLargestCommonSubArray(arr1, arr2);
             Console.WriteLine("The Largest Common Array is");
+            // Printing Largest Common Array Using foreach
             foreach (int i in r5)
             {
                 Console.Write(i);
@@ -60,6 +61,7 @@ namespace Assignment1
         {
             try
             {
+                // Throwing an exception if first element is greater than second.
                 if (x > y)
                 {
                     throw new Exception();
@@ -75,7 +77,7 @@ namespace Assignment1
             
             catch
             {
-                /* We are not throwing any spedicfic Exceptions keeping in mind that input is giving 
+                /* We are not throwing any spedicfic Exceptions keeping in mind that input given by user satisfy the condition
                  */
                 Console.WriteLine("Exception occured while computing printSelfDividingNumbers()");
                 if (x > y)
@@ -93,11 +95,13 @@ namespace Assignment1
                 int num = x;
                 while(num!=0)
                 {
+                    //Here we are fetching the last digit using percentile and then comparing if it equal to zero or percetile is zero to break the loop
                     int ldigit = num%10;
                     if (ldigit == 0 || x % ldigit != 0)
                     {
                         break;
                     }
+
                     num = num / 10;
                     if (num == 0)
                     {
@@ -127,7 +131,7 @@ namespace Assignment1
         {
             try
             {
-               // Console.WriteLine(x);
+               // used nested for loop to traverse and check values in the series.
                 for (int i = 1; i <= x; i++)
                 {
                     for (int j = 1; j <= i;j++)
@@ -161,6 +165,7 @@ namespace Assignment1
         public static void printTriangle(int x)
         {
             int c = x;
+            //used for nested for loops to print * and give spaces before printing pattern.
             for (int i = 0; i < x; i++)
             {
                 for (int j = 0; j < i; j++)
