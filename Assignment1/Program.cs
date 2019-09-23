@@ -306,6 +306,7 @@ namespace Assignment1
         {
             try
             {
+                //Initially we are reading 3 string from console to work with
                 Console.WriteLine("Enter First String : ");
                 string str1 = Console.ReadLine();
                 str1 = str1.ToLower();
@@ -319,11 +320,13 @@ namespace Assignment1
                 str3 = str3.ToLower();
                 int str3len = str3.Length;
                 Console.WriteLine("{0}  {1}  {2}", str1len, str2len, str3len);
+                //Just to check if the result string is too long .
                 int biggerstr = Math.Max(str2len, str1len);
                 if (str3len > biggerstr + 1)
                 {
                     throw new Exception("Result String cannot be this long");
                 }
+                //Concatenated string is created
                 string fin = str1.ToLower() + str2.ToLower() + str3.ToLower();
                 char[] unele = getUniqueElements(fin);
                 Console.WriteLine(unele[0]);
@@ -332,6 +335,7 @@ namespace Assignment1
                 while (abc == 1)
                 {
 
+                    //Random brute force is applied on to check each random combinations.
                     int[] assign = assignRandom(unele);
                     while (assign[Array.IndexOf(unele, str1[0])] == 0 || assign[Array.IndexOf(unele, str2[0])] == 0)
                     {
@@ -362,14 +366,16 @@ namespace Assignment1
         }
         public static char[] getUniqueElements(string finalstr)
         {
+            //Here we are obtaining unique set of elements from concatenated string.
             var hash = new HashSet<char>(finalstr.ToArray());
             return hash.ToArray();
         }
         public static int[] assignRandom(char[] uniel)
         {
-            //Console.WriteLine("In assign Random");
+            //Here we are assigning random values to each element in the unique array which we will use to solve of equation.
             char[] Uniqelements = uniel;
             int noOfEle = Uniqelements.Length;
+            //Random function is used to assign random values
             Random random = new Random();
             HashSet<int> randomNumbers = new HashSet<int>();
             for (int i = 0; i < noOfEle; i++)
@@ -384,6 +390,7 @@ namespace Assignment1
 
             try
             {
+                //Here we are generating sum of each String given according to place values and their assigned random values.
                 int len = s.Length;
                 double sum = 0;
                 for (int i = 0; i < len; i++)
