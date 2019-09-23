@@ -10,21 +10,25 @@ namespace Assignment1
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Question 1...!!!");
             int a = 1, b = 22;
-            Console.WriteLine("Question 1");
             printSelfDividingNumbers(a, b);
-            Console.WriteLine("Question 2");
+            Console.WriteLine("Question 2...!!!");
             int n2 = 5;
             printSeries(n2);
             int n3 = 5;
+            Console.WriteLine("Question 3...!!!");
             printTriangle(n3);
             int[] J = new int[] { 1, 3,5 };
             int[] S = new int[] { 1, 3, 3,5, 2, 2, 2, 2, 2 };
+            Console.WriteLine("Question 4...!!!");
             int r4 = numJewelsInStones(J, S);
-            Console.WriteLine(r4);
+            Console.WriteLine("Number of Jewels : {0}", r4);
             int[] arr1 = new int[] { 1, 2, 5, 6, 7, 8, 9 };
             int[] arr2 = new int[] { 1, 2, 3, 4, 5 };
+            Console.WriteLine("Question 4...!!!");
             int[] r5 = getLargestCommonSubArray(arr1, arr2);
+            Console.WriteLine("The Largest Common Array is");
             foreach (int i in r5)
             {
                 Console.Write(i);
@@ -36,6 +40,22 @@ namespace Assignment1
             Console.ReadKey();
 
         }
+
+        /*
+* x – starting range, integer (int)
+* y – ending range, integer (int)
+* 
+* summary      : This method prints all the self-dividing numbers between x and y. 
+* A self-dividing number is a number that is divisible by every digit it contains.
+* 128 is a self-dividing number because 128 % 1 == 0, 128 % 2 == 0 and 128 % 8 == 0
+* For example 1, 22 will print all the self.-dividing numbers between 1 and 22 i.e. 
+* 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 15, 22
+* Tip: Write a method isSelfDividing() to compute if a number is self-dividing or not.
+*
+* returns      : N/A
+* return type  : void
+*
+*/
         public static void printSelfDividingNumbers(int x, int y)
         {
             try
@@ -55,7 +75,7 @@ namespace Assignment1
             
             catch
             {
-                /* We are not throwing any spedicif Exceptions keeping in mind that input is giving 
+                /* We are not throwing any spedicfic Exceptions keeping in mind that input is giving 
                  */
                 Console.WriteLine("Exception occured while computing printSelfDividingNumbers()");
                 if (x > y)
@@ -64,6 +84,8 @@ namespace Assignment1
                 }
             }
         }
+
+
         public static void isSelfDividing(int x)
         {
             try
@@ -88,6 +110,19 @@ namespace Assignment1
                 
             }
         }
+
+        /*
+* n – number of terms of the series, integer (int)
+* 
+* summary        : This method prints the following series till n terms:
+* 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 6, 6 …. n terms
+* For example, if n = 5, output will be
+* 1, 2, 2, 3, 3
+*
+* returns        : N/A
+* return type    : void
+*/
+
         public static void printSeries(int x)
         {
             try
@@ -106,6 +141,23 @@ namespace Assignment1
                 Console.WriteLine("Error in printSeries()");
             }
         }
+
+        /*
+* n – number of lines for the pattern, integer (int)
+* 
+* summary      : This method prints an inverted triangle using *
+* For example n = 5 will display the output as: 
+*********
+ *******
+  *****
+   ***
+    *
+
+*
+* returns      : N/A
+* return type  : void
+*/
+
         public static void printTriangle(int x)
         {
             int c = x;
@@ -123,6 +175,25 @@ namespace Assignment1
                 c--;
             }
         }
+        /*
+* a – array of elements, integer (int)
+* 
+* summary      : You're given an array J representing the types of stones that are 
+* jewels, and S representing the stones you have.  Each element in S is a type of 
+* stone you have.  You want to know how many of the stones you have are also jewels.
+* The elements in J are guaranteed distinct.
+* The function should return an integer.
+* For example:
+* J = [1,3], S = [1,3,3,2,2,2,2,2] will return the output: 
+* 3 (since 1, 3, 3 are jewels)
+* and
+* J = [2], S = [0,0] will return the output: 
+* 0
+*
+* returns      : Integer
+* return type  : int
+*/
+       
         public static int numJewelsInStones(int[] J,int[] S)
         {
             int count = 0;
@@ -138,6 +209,27 @@ namespace Assignment1
             }
             return count;
         }
+
+        /*
+* a – array of elements, integer (int)
+* 
+* summary      : This method finds the largest common contiguous subarray from two 
+* sorted arrays. The given arrays are sorted in ascending order. If there are multiple 
+* arrays with the same length, then return the last array having the maximum length.
+* The function should return the array.
+* For example:
+* a = [1,2,5,6,7,8,9], b = [1,2,3,4,5] will return the output: 
+* [1,2]
+* and
+* a = [1,2,3,4,5,6,7,8,9], b = [1,2,5,7,8,9,10] will return the output: 
+* [7,8,9]
+* and
+* a = [1,2,3,4,5,6], b = [1,2,5,6,7,8,9] will return the output: 
+* [5,6]
+*
+* returns      : Array of integers
+* return type  : int[]
+*/
 
         public static int[] getLargestCommonSubArray(int[] a, int[] b)
         {
@@ -185,6 +277,26 @@ namespace Assignment1
 
             return null; // return the actual array
         }
+
+        /*
+* 
+* summary      : At a recent college reunion meeting of one of the instructors of this 
+* class, his friend was wearing the t-shirt shown in the picture above. It was a gift
+* from his niece. Appropriate assignment of numbers to each digit solves the puzzle 
+* above. In this question, write a general method to solve puzzles such as the above.
+* The method should ask the user for the two input strings (e.g. uber, cool) and the 
+* output string (e.g. uncle) and identify a set of number assignments that solve the 
+* puzzle and print out the numbers.
+*
+* Tip: There is no need to search for algorithms. It is fine to brute force all 
+* possible combinations. However, for full credit, use maximal organization of your
+* code into the appropriate methods (e.g. a method to collect inputs, a method to
+* identify unique characters in the strings, a method to test the currently assigned
+* values etc).
+*
+* returns      : nothing
+* return type  : void
+*/
         public static void solvePuzzle()
         {
             try
@@ -253,7 +365,6 @@ namespace Assignment1
             //Console.WriteLine("In assign Random");
             char[] Uniqelements = uniel;
             int noOfEle = Uniqelements.Length;
-            int[] UniqVal = new int[noOfEle];
             Random random = new Random();
             HashSet<int> randomNumbers = new HashSet<int>();
             for (int i = 0; i < noOfEle; i++)
