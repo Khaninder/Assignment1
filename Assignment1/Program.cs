@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Assignment1
 {
@@ -6,7 +10,7 @@ namespace Assignment1
     {
         static void Main(string[] args)
         {
-            int a = 120, b = 110;
+            int a = 1, b = 22;
             Console.WriteLine("Question 1");
             printSelfDividingNumbers(a, b);
             Console.WriteLine("Question 2");
@@ -18,10 +22,14 @@ namespace Assignment1
             int[] S = new int[] { 1, 3, 3,5, 2, 2, 2, 2, 2 };
             int r4 = numJewelsInStones(J, S);
             Console.WriteLine(r4);
-            //int[] arr1 = new int[] { 1, 2, 5, 6, 7, 8, 9 };
-            //int[] arr2 = new int[] { 1, 2, 3, 4, 5 };
-            // int[] r5 = getLargestCommonSubArray(arr1, arr2);
-            //Console.WriteLine(r5);
+            int[] arr1 = new int[] { 1, 2, 5, 6, 7, 8, 9 };
+            int[] arr2 = new int[] { 1, 2, 3, 4, 5 };
+            int[] r5 = getLargestCommonSubArray(arr1, arr2);
+            foreach (int i in r5)
+            {
+                Console.Write(i);
+            }
+            Console.WriteLine();
 
             Console.WriteLine("Question 6 .... \n");
             solvePuzzle();
@@ -131,26 +139,154 @@ namespace Assignment1
             return count;
         }
 
+        public static int[] getLargestCommonSubArray(int[] a, int[] b)
+        {
+            try
+            {
+                if (a.Length > b.Length)
+                {
+                    int[] temper = b;
+                    b = a;
+                    a = temper;
+                }
+                List<int> final = new List<int>();
+                for (int i = 0; i < a.Length; i++)
+                {
+                    List<int> temp = new List<int>();
+                    for (int j = 0; j < b.Length; j++)
+                    {
+                        if (a[i] == b[j])
+                        {
+                            for (int k = 0; k < (a.Length - i); k++)
+                            {
+                                if (a[i + k] == b[j + k])
+                                {
+                                    temp.Add(a[i + k]);
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            if (temp.ToArray().Length >= final.ToArray().Length)
+                            {
+                                final = temp;
+                                temp = new List<int>();
+                            }
+                        }
+                    }
+                }
+                return final.ToArray();
+            }
+            catch
+            {
+                Console.WriteLine("Exception occured while computing getLargestCommonSubArray()");
+            }
+
+            return null; // return the actual array
+        }
         public static void solvePuzzle()
         {
             try
             {
                 Console.WriteLine("Enter First String : ");
-                String str1 = Console.ReadLine();
+                string str1 = Console.ReadLine();
+                str1 = str1.ToLower();
                 int str1len = str1.Length;
-                
                 Console.WriteLine("Enter Second String : ");
-                String str2 = Console.ReadLine();
+                string str2 = Console.ReadLine();
+                str2 = str2.ToLower();
                 int str2len = str2.Length;
                 Console.WriteLine("Enter Third String : ");
-                String str3 = Console.ReadLine();
+                string str3 = Console.ReadLine();
+                str3 = str3.ToLower();
                 int str3len = str3.Length;
+                Console.WriteLine("{0}  {1}  {2}", str1len, str2len, str3len);
+                int biggerstr = Math.Max(str2len, str1len);
+                if (str3len > biggerstr + 1)
+                {
+                    throw new Exception("Result String cannot be this long");
+                }
+                string fin = str1.ToLower() + str2.ToLower() + str3.ToLower();
+                char[] unele = getUniqueElements(fin);
+                Console.WriteLine(unele[0]);
+                int abc = 1;
+                Console.WriteLine("Waiting for Correct Match..!!!");
+                while (abc == 1)
+                {
+
+                    int[] assign = assignRandom(unele);
+                    while (assign[Array.IndexOf(unele, str1[0])] == 0 || assign[Array.IndexOf(unele, str2[0])] == 0)
+                    {
+                        assign = assignRandom(unele);
+                    }
+                    double val1 = getSum(str1.ToLower(), unele, assign);
+                    double val2 = getSum(str2.ToLower(), unele, assign);
+                    double val3 = getSum(str3.ToLower(), unele, assign);
+                    if (val1 + val2 == val3)
+                    {
+                        Console.WriteLine("[{0}]", string.Join(", ", unele));
+                        Console.WriteLine("[{0}]", string.Join(", ", assign));
+                        Console.Write(str1); Console.Write(val1); Console.WriteLine();
+                        Console.Write(str2); Console.Write(val2); Console.WriteLine();
+                        Console.Write(str3); Console.Write(val3); Console.WriteLine();
+                        abc = 0;
+                    }
+                }
+                Console.ReadKey();
+
+            }
+            catch (Exception e)
+            {
+
+                Console.WriteLine(e);
+                Console.ReadLine();
+            }
+        }
+        public static char[] getUniqueElements(string finalstr)
+        {
+            var hash = new HashSet<char>(finalstr.ToArray());
+            return hash.ToArray();
+        }
+        public static int[] assignRandom(char[] uniel)
+        {
+            //Console.WriteLine("In assign Random");
+            char[] Uniqelements = uniel;
+            int noOfEle = Uniqelements.Length;
+            int[] UniqVal = new int[noOfEle];
+            Random random = new Random();
+            HashSet<int> randomNumbers = new HashSet<int>();
+            for (int i = 0; i < noOfEle; i++)
+            {
+                while (!randomNumbers.Add(random.Next(0, 10))) ;
+            }
+            return randomNumbers.ToArray();
+        }
+
+        public static double getSum(string s, char[] uniquele, int[] assigned)
+        {
+
+            try
+            {
+                int len = s.Length;
+                double sum = 0;
+                for (int i = 0; i < len; i++)
+                {
+
+                    sum += assigned[Array.IndexOf(uniquele, s[i])] * Math.Pow(10, len - 1 - i);
+                }
+
+                return sum;
             }
             catch
             {
-                Console.WriteLine("Error in solvePuzzle() Method");
+                Console.WriteLine("Error while generating random values");
+                return 0;
             }
-            
+
+
+
         }
+
     }
 }
